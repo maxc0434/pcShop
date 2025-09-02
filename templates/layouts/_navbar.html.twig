@@ -1,5 +1,10 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+{% endblock %}
+
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
-  <div class="container">
+  <div class="container navContainer">
     <a class="navbar-brand" href="#">PC Shop</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,21 +14,25 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ path('app_homepage') }} ">Accueil</a>
         </li>
-        {% if categories is defined %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Catégories
             </a>
             <ul class="dropdown-menu">
+                <li><a class="dropdown-item text-primary categoryTitle" href="{{ path('app_categorie_index') }}">Toutes les Catégories</a></li>
+                              
+                <li><hr class="dropdown-divider"></li>
+        {% if categories is defined %}
+              
               {% for category in categories %}
-                <li><a class="dropdown-item text-primary categoryTitle" href="{{ path('app_categorie_index') }}">{{ category.name }}</a></li>
-                  
+                <li><a class="dropdown-item text-primary categoryTitle" href="{{ path('app_categorie_show', {'id':category.id}) }}">{{ category.name }}</a></li>
+
                 <li><hr class="dropdown-divider"></li>
               {% endfor %}
 
+        {% endif %}
             </ul>
           </li>
-        {% endif %}
 
       <li class="nav-item">
         <a class="nav-link" href="{{ path('app_article_index') }}">Nos Articles</a> 

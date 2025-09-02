@@ -1,0 +1,36 @@
+.categIndexCss{
+    display: flex;
+    justify-content: center;
+
+}
+
+.categCard{
+    margin: 20px;
+    border: 1mm ridge rgba(146, 146, 219, 0.744) ;
+
+}
+
+.categImg{
+    max-width: 400px;
+    max-height: 300px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.divBtn {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.card-title {
+    margin-top: auto;
+}
+
+
+.divCardCateg{
+    width: 600px;
+}

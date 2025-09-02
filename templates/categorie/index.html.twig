@@ -2,10 +2,14 @@
 
 {% block title %}Categorie index{% endblock %}
 
-{% block body %}
-    <h1 class="text-center mt-5 mb-3">Les Categories</h1>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/categorie.css') }}">
+{% endblock %}
 
-<div class="container">
+{% block body %}
+    <h1 class="text-center mt-5 mb-3">Les Catégories</h1>
+
+{# <div class="container">
     <table class="table">
         <thead>
             <tr>
@@ -31,8 +35,31 @@
         {% endfor %}
         </tbody>
     </table>
+</div> #}
+
+        <div class="container categIndexCss">
+     {% for categorie in categories %}
+        <div class="card categCard " >
+        <img class="categImg mt-3 " src="{{ categorie.photo}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h4 class="card-title text-center fw-bold">{{ categorie.name }}</h4>
+
+                <p class="card-text">{{ categorie.description }} </p>
+                        
+                        <div class="divBtn">
+                            <a class="btn btn-outline-primary" href="{{ path('app_categorie_show', {'id': categorie.id}) }}">Voir</a>
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <a class="btn btn-outline-info ms-1" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">Modifier</a>
+                                {% endif %}
+                        </div>
+            </div>
+        </div>
+     {% endfor %}
+        </div>
+
+{% if is_granted("ROLE_ADMIN") %}
+<div class="container d-flex justify-content-center mt-5">
+    <a class="btn btn-outline-success" href="{{ path('app_categorie_new') }}">Créer</a>
 </div>
-<div class="container d-flex justify-content">
-    <a class="btn btn-success" href="{{ path('app_categorie_new') }}">Créer</a>
-</div>
+{% endif %}
 {% endblock %}

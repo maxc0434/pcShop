@@ -23,11 +23,14 @@ class Article
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\Column]
+    #[ORM\Column (nullable: true)]
     private ?bool $type = null;
 
     #[ORM\ManyToOne(inversedBy: 'article')]
     private ?Categorie $categorie = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $photo = null;
 
     public function getId(): ?int
     {
@@ -90,6 +93,18 @@ class Article
     public function setCategorie(?Categorie $categorie): static
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): static
+    {
+        $this->photo = $photo;
 
         return $this;
     }
