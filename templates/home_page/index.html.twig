@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Accueil Pc-Shop {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container d-flex flex-column ">
+
+    <div class="container homePagePresent">
+        <h1 class="text-center titleSite"> PC Shop </h1>
+        <img class="imgPresentSite" src="https://storage-asset.msi.com/event/2022/cnd/i-want-it-all/images/reason-img-01.jpg" alt="">
+    </div>
+
+    <div class="container">
+        <h2 class="text-center captionSite1"> Pour les amoureux de l'informatique</h2>
+                                            <br><br>
+        <h3 class="text-center captionSite2"> (Notez qu'il y aura quand même un mac à la vente, histoire de caler les portes... </h3>
+
+        <h4 class="text-center captionSite3"> ...Notez aussi que ca fait cher le cale-porte)</h4>
+    </div>
+
+
+
+
+
+</div>
+
+
+{% endblock %}

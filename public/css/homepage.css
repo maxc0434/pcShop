@@ -1,0 +1,78 @@
+body{
+    position: relative;
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;
+    background: url(https://4kwallpapers.com/images/wallpapers/matrix-program-falling-data-illustration-green-code-black-2560x1440-3292.jpg);
+    opacity: 0.5;
+}
+.titleSite{
+    font-family: "Courier New", Courier, monospace;
+    font-size: 90px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.captionSite1{
+    font-family: "Courier New", Courier, monospace;
+    font-size: 40px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+
+}
+
+.captionSite2{
+    font-family: "Courier New", Courier, monospace;
+    font-size: 30px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.captionSite3{
+    font-family: "Courier New", Courier, monospace;
+    font-size: 20px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.imgPresentSite{
+    border: 3px solid #2a2a2a;
+    border-radius: 8px;             
+    padding: 5px;                   
+    box-shadow: 0 2px 8px #888888;
+    width: 800px;
+    position: relative;
+    left: 235px;
+}
+.homePagePresent{
+    display: flex;
+    flex-direction: column;
+}

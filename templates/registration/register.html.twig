@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}page d'Enregistrement{% endblock %}
+
+{% block body %}
+    <h1 class="text-center mt-3 mb-3">Enregistrement</h1>
+
+    <div class="container ">
+    {{ form_errors(registrationForm) }}
+    <div class="divForm card p-4 shadow-sm">
+    {{ form_start(registrationForm) }}
+            {{ form_widget(registrationForm.nom, {'attr':{'class':'form form-control','placeholder':"Nom"}}) }} <br>
+            {{ form_widget(registrationForm.prenom, {'attr':{'class':'form form-control','placeholder':"Prénom"}}) }} <br>
+            {{ form_widget(registrationForm.email, {'attr':{'class':'form form-control','placeholder':"email"}}) }} <br>
+            {{ form_widget(registrationForm.plainPassword.first, {'attr':{'class':'form form-control','placeholder':"Mot de Passe"}}) }} <br>
+            {{ form_widget(registrationForm.plainPassword.second, {'attr':{'class':'form form-control','placeholder':"Répéter le Mot de Passe"}}) }} <br>
+<br>
+<div>
+<br>
+        {{ form_row(registrationForm.agreeTerms) }}
+<br>
+</div>
+<div class="container ">
+        <button type="submit" class="btn btn-primary">S'Enregistrer</button>
+</div>
+
+<br>
+    {{ form_end(registrationForm) }}
+    </div>
+    </div>
+{% endblock %}
