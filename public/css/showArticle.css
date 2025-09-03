@@ -1,16 +1,17 @@
-.star { color: #ccc; font-size: 2em; cursor: pointer; }
-.star-selected { color: #ffd700; }
+/* .star { color: #ccc; font-size: 2em; cursor: pointer; }
+.star-selected { color: #ffd700; } */
 
 .star-rating {
   direction: rtl;
   font-size: 2rem;
 }
 
+
 .star-rating input[type="radio"] {
-  display: none; /* cache les boutons radio */
+  display: none; 
 }
 
-.star-rating label.star {
+/* .star-rating label.star {
   color: #ccc;
   cursor: pointer;
 }
@@ -19,4 +20,4 @@
 .star-rating label.star:hover,
 .star-rating label.star:hover ~ label.star {
   color: gold;
-}
+} */

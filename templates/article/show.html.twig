@@ -5,49 +5,73 @@
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{ asset('css/showArticle.css') }}">
+	<style>
+		.star {
+			font-size: 2rem;
+			color: #ccc;
+			cursor: pointer;
+		}
+		.star-selected {
+			color: gold;
+		}
+		.star-rating {
+			display: inline-block;
+			margin-bottom: 0.5rem;
+		}
+	</style>
 {% endblock %}
-
 {% block body %}
 	<h1 class="text-center mt-5 mb-3">Votre Sélection</h1>
-    <div class="container">
-	<table class="table">
-		<tbody>
-			{# <tr>
-				<th>Id</th>
-				<td>{{ article.id }}</td>
-			</tr> #}
-			<tr>
-				<th>Dénomination</th>
-				<td>{{ article.name }}</td>
-			</tr>
-			<tr>
-				<th>Description</th>
-				<td>{{ article.caption }}</td>
-			</tr>
-			<tr>
-				<th>Prix</th>
-				<td>{{ article.price }}
-					€</td>
-			</tr>
-			<tr>
-				<th>Photo</th>
-				<td>
-					<img class="w-25" src="{{ article.photo }}" alt=""></td>
-			</tr>
-			<tr>
-				<th>PC ou MAC
-				</th>
-				<td>{{ article.type ? 'Mac' : 'PC' }}</td>
-			</tr>
-			<tr>
-				<th>Les Commentaires des clients
-				</th>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-    </div>
+	<div class="container">
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Id</th>
+					<td>{{ article.id }}</td>
+				</tr>
+				<tr>
+					<th>Dénomination</th>
+					<td>{{ article.name }}</td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td>{{ article.caption }}</td>
+				</tr>
+				<tr>
+					<th>Prix</th>
+					<td>{{ article.price }}
+						€</td>
+				</tr>
+				<tr>
+					<th>Photo</th>
+					<td><img class="w-25" src="{{ article.photo }}" alt=""></td>
+				</tr>
+				<tr>
+					<th>PC ou MAC
+					</th>
+					<td>{{ article.type ? 'Mac' : 'PC' }}</td>
+				</tr>
+				<tr>
+					<th>Les Commentaires des clients
+					</th>
+					<td>
 
+						{% for comment in comments %}
+							<div class="container">
+								<strong>{{ comment.autor }}</strong>
+								-
+								<small>{{ comment.createdAt|date('d/m/Y H:i') }}</small>
+								<p>{{ comment.content }}</p>
+							</div>
+						{% else %}
+							<p>Aucun commentaire pour cet article, soyez le premier à commenter !</p>
+						{% endfor %}
+
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	{% if app.user %}
 		<div class="container">
 			<div class="row">
@@ -56,26 +80,43 @@
 
 					{{ form_start(form) }}
 
+					{{ form_errors(form) }}
+
 					<div class="form-group">
 						{{ form_label(form.autor) }}
 						{{ form_widget(form.autor, { 'attr': {'class': 'form-control'} }) }}
+						{{ form_errors(form.autor) }}
 					</div>
 
 					<div class="form-group">
 						{{ form_label(form.date) }}
 						{{ form_widget(form.date, { 'attr': {'class': 'form-control'} }) }}
+						{{ form_errors(form.date) }}
 					</div>
 
 					<div class="form-group">
 						{{ form_label(form.note) }}
 
-						{# Affichage personnalisé des étoiles #}
+
 						<div class="star-rating">
-							{% for i in 1..5 %}
-								<input type="radio" id="star{{ i }}" name="{{ form.note.vars.full_name }}" value="{{ i }}" {% if form.note.vars.value == i %} checked {% endif %}/>
+							{% for i in 5..1 %}
+								<input type="radio" id="star{{ i }}" name="{{ form.note.vars.full_name }}" value="{{ i }}" {% if form.note.vars.value == i %} checked {% endif %} style="display:none;">
 								<label for="star{{ i }}" class="star" title="{{ i }} étoiles">&#9733;</label>
 							{% endfor %}
 						</div>
+
+						<style>
+							.star {
+								font-size: 2rem;
+								color: #ccc;
+								cursor: pointer;
+							}
+							input[type=radio]:checked ~ label.star,
+							label.star:hover,
+							label.star:hover ~ label.star {
+								color: gold;
+							}
+						</style>
 
 						{{ form_errors(form.note) }}
 					</div>
@@ -83,13 +124,15 @@
 					<div class="form-group">
 						{{ form_label(form.content, 'Votre Commentaire:') }}
 						{{ form_widget(form.content, { 'attr': {'class': 'form-control'} }) }}
+						{{ form_errors(form.content) }}
 					</div>
+					{{ form_rest(form) }}
 
 					<div class="form-group">
 						<button class="btn btn-info mt-2 text-white" type="submit">Soumettre</button>
 					</div>
 
-					{{ form_end(form, {'render_rest':false}) }}
+					{{ form_end(form, {'render_rest': false}) }}
 
 				</div>
 			</div>
@@ -97,47 +140,11 @@
 	{% endif %}
 
 
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-const stars = document.querySelectorAll('.star-rating .star');
-let selected = -1;
-
-for (let i = 0; i < stars.length; i++) {
-stars[i].addEventListener('mouseover', function () {
-colorStars(i);
-});
-
-stars[i].addEventListener('mouseleave', function () {
-colorStars(selected);
-});
-
-stars[i].addEventListener('click', function () {
-selected = i;
-colorStars(selected);
-document.getElementById('star-value').value = i + 1;
-});
-}
-
-function colorStars(index) {
-for (let j = 0; j < stars.length; j++) {
-if (j <= index) {
-stars[j].classList.add('star-selected');
-} else {
-stars[j].classList.remove('star-selected');
-}
-}
-}
-});
-	</script>
-
-
 	<div class="container d-flex justify-content-center mb-5 mt-3">
 		<a class="btn btn-outline-info rounded-pill px-4 py-2 shadow-sm fw-bold" href="{{ path('app_article_index') }}">Retour</a>
 		{% if is_granted("ROLE_ADMIN") %}
 			<a class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm fw-bold ms-1 me-1" href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-		{{ include('article/_delete_form.html.twig') }}
+			{{ include('article/_delete_form.html.twig') }}
 		{% endif %}
 	</div>
-
-
 {% endblock %}
