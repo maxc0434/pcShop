@@ -1,0 +1,22 @@
+.star { color: #ccc; font-size: 2em; cursor: pointer; }
+.star-selected { color: #ffd700; }
+
+.star-rating {
+  direction: rtl;
+  font-size: 2rem;
+}
+
+.star-rating input[type="radio"] {
+  display: none; /* cache les boutons radio */
+}
+
+.star-rating label.star {
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star-rating input[type="radio"]:checked ~ label.star,
+.star-rating label.star:hover,
+.star-rating label.star:hover ~ label.star {
+  color: gold;
+}
