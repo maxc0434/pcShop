@@ -5,7 +5,7 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light">
   <div class="container navContainer">
-    <a class="navbar-brand" href="#">PC Shop</a>
+    <a class="navbar-brand" href="#"> <img class="logoSite" src="https://st2.depositphotos.com/1007989/9405/i/450/depositphotos_94050838-stock-illustration-laptop-telling-joke.jpg" alt=""> PC Shop</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -41,14 +41,14 @@
 
          {% if app.user %}
             <li class="nav-item navbtnCss2">
-              <a href=" {{ path('app_logout')}}" class="nav-link fs-4"> Déconnexion </a>
+              <a href=" {{ path('app_logout')}}" class="nav-link "> Déconnexion </a>
             </li>
           {% else %}
             <li class="nav-item">
-              <a href= " {{ path('app_login')}}" class="nav-link fs-4"> Connexion</a>
+              <a href= " {{ path('app_login')}}" class="nav-link "> Connexion</a>
             </li>
             <li class="nav-item">
-              <a href= " {{ path('app_register')}}" class="nav-link fs-4"> Inscription</a>
+              <a href= " {{ path('app_register')}}" class="nav-link "> Inscription</a>
             </li>
         {% endif %} 
     
