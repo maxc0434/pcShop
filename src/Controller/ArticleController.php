@@ -66,15 +66,9 @@ final class ArticleController extends AbstractController
         ]);
     }
 
-    // #[Route('/{id}', name: 'app_article_show', methods: ['GET'])]
-    // public function show(Article $article): Response
-    // {
-    //     return $this->render('article/show.html.twig', [
-    //         'article' => $article,
-    //     ]);
-    // }
 
-    #[Route('/{id}', name: 'app_article_show', methods: ['GET', 'POST'])]
+
+    #[Route('/show/{id}', name: 'app_article_show', methods: ['GET', 'POST'])]
     public function show(CommentRepository $commentRepository, Article $article, Request $request, EntityManagerInterface $em): Response
     {
         
@@ -92,8 +86,6 @@ final class ArticleController extends AbstractController
             return $this->redirectToRoute('app_article_index');
         }
         
-        // $comments = $commentRepository->findBy(['article' => $article]);
-       
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
@@ -129,5 +121,21 @@ final class ArticleController extends AbstractController
 
         return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    #[Route('/comment/{id}', name: 'app_article_comment', methods: ['GET'])]
+    public function comment(ArticleRepository $articleRepository, CommentRepository $commentRepository, int $id): Response
+    {
+        $article = $articleRepository->find($id);
+        $comment = $commentRepository->findBy(['article' => $article]);
+
+        return $this->render('article/comments.html.twig', [
+            'comments' => $comment,
+
+
+
+        ]);
+    }
+
 
 }

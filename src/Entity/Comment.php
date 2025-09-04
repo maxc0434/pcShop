@@ -28,6 +28,7 @@ class Comment
     private ?int $note = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?Article $article = null;
 
     public function getId(): ?int

@@ -52,22 +52,8 @@
 					<td>{{ article.type ? 'Mac' : 'PC' }}</td>
 				</tr>
 				<tr>
-					<th>Les Commentaires des clients
-					</th>
-					<td>
-
-						{% for comment in comments %}
-							<div class="container">
-								<strong>{{ comment.autor }}</strong>
-								-
-								<small>{{ comment.createdAt|date('d/m/Y H:i') }}</small>
-								<p>{{ comment.content }}</p>
-							</div>
-						{% else %}
-							<p>Aucun commentaire pour cet article, soyez le premier à commenter !</p>
-						{% endfor %}
-
-					</td>
+					<th>Les Commentaires des clients</th>
+					<td> <a href="{{ path ('app_article_comment', {'id': article.id}) }}"> Voir tous les Commentaires</a></td>
 				</tr>
 			</tbody>
 		</table>

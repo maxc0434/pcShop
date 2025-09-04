@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article
+{% endblock %}
+
+{% block body %}
+
+<div>
+	{% for comment in comments %}
+		<div class="container">
+			<strong>{{ comment.autor.prenom }}</strong>
+
+            <small>a commenté le : {{ comment.date |date('d/m/Y') }} </small>
+			
+			<p>{{ comment.content }}</p>
+		</div>
+	{% else %}
+		<p>Aucun commentaire pour cet article, soyez le premier à commenter !</p>
+	{% endfor %}
+</div>
+
+
+{% endblock %}
