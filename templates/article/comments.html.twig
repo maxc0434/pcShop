@@ -14,10 +14,14 @@
 			
 			<p>{{ comment.content }}</p>
 		</div>
+<div>
+	<a class="btn" href="{{ path('app_comment_delete', {'id': comment.id}) }}"> Supprimer </a>
+</div>
 	{% else %}
 		<p>Aucun commentaire pour cet article, soyez le premier à commenter !</p>
 	{% endfor %}
 </div>
+
 
 
 {% endblock %}

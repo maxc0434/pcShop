@@ -112,7 +112,9 @@
 						{{ form_widget(form.content, { 'attr': {'class': 'form-control'} }) }}
 						{{ form_errors(form.content) }}
 					</div>
-					{{ form_rest(form) }}
+					{# {{ form_rest(form) }} affiche tous les champs obligatoires du formulaire, en commentant cette ligne on supprime les champs obligatoires
+					 mais aussi le token, donc pas d'envoi en BDD. il faut rajouter le token avec la ligne 117 #} 
+					{{ form_widget(form._token) }} 
 
 					<div class="form-group">
 						<button class="btn btn-info mt-2 text-white" type="submit">Soumettre</button>

@@ -10,6 +10,7 @@ use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\CommentRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,21 +72,21 @@ final class ArticleController extends AbstractController
     #[Route('/show/{id}', name: 'app_article_show', methods: ['GET', 'POST'])]
     public function show(CommentRepository $commentRepository, Article $article, Request $request, EntityManagerInterface $em): Response
     {
-        
+
         $comment = new Comment();
         $comment->setArticle($article);
         $comment->setAutor($this->getUser());
         $comment->setDate(new \DateTime());
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($comment);
             $em->flush();
-            
+
             return $this->redirectToRoute('app_article_index');
         }
-        
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
@@ -132,10 +133,17 @@ final class ArticleController extends AbstractController
         return $this->render('article/comments.html.twig', [
             'comments' => $comment,
 
-
-
         ]);
     }
 
-
+    #[Route('/delete/comment/{id}', name: 'app_comment_delete', methods: ['GET', 'POST'])]
+    public function delete_comment(Request $request, EntityManagerInterface $entityManager, Comment $comment): Response
+    {
+        // if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->getPayload()->getString('_token'))) {
+            $entityManager->remove($comment);
+            $entityManager->flush();
+        // }
+        // $articleId = $comment->getArticle()->getId();
+        return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
+    }
 }

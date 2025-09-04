@@ -1,5 +1,6 @@
-/* .star { color: #ccc; font-size: 2em; cursor: pointer; }
-.star-selected { color: #ffd700; } */
+#comment_note{
+  background: red;
+}
 
 .star-rating {
   direction: rtl;
@@ -11,13 +12,3 @@
   display: none; 
 }
 
-/* .star-rating label.star {
-  color: #ccc;
-  cursor: pointer;
-}
-
-.star-rating input[type="radio"]:checked ~ label.star,
-.star-rating label.star:hover,
-.star-rating label.star:hover ~ label.star {
-  color: gold;
-} */
