@@ -27,10 +27,10 @@
 
 
 	<body data-turbo="false">
-		{% block nav %}
-			{% include 'layouts/_navbar.html.twig' %}
-		{% endblock %}
-
+		{% block nav %} {% include 'layouts/_navbar.html.twig' %}{% endblock %}
+		{% include 'layouts/_flash_message.html.twig' %}
+		
+		
 		{% block body %}{% endblock %}
 	</body>
 </html>

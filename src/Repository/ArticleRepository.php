@@ -40,4 +40,30 @@ class ArticleRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    /*
+     
+
+
+Recherche les produits dont le nom ou la description contient la chaîne passée en paramètre.
+@param string $query Le mot-clé recherché par l'utilisateur
+@return Product[] Retourne un tableau d'objets Product correspondant à la recherche */
+
+            public function searchEngine(string $query){
+                //  Crée un QueryBuilder pour construire dynamiquement la requête de recherche
+            return $this->createQueryBuilder('p')
+
+                // Recherche les produits dont le nom contient la requête
+                ->where('p.name LIKE :query')
+
+                // Ou dont la description contient la requête
+                ->orWhere('p.caption LIKE :query')
+
+                // Définit la valeur du paramètre "query" avec des % pour la recherche partielle
+                ->setParameter('query', '%' . $query . '%')
+
+                // Exécute la requête et retourne les résultats
+                ->getQuery()
+                ->getResult();
+        }
 }

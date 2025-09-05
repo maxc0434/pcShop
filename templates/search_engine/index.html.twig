@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SearchEngineController!{% endblock %}
+
+{% block body %}
+ {% include 'layouts/_flash_message.html.twig' %}
+
+
+<div class="divBody">
+    <div class="row">
+    {% for article in articles %}
+        <div class="container col-md-3 cardMargin">
+            <div class="card">
+                <a href="{{ path('app_article_show', {'id':article.id})}}"><img class="w-50" src="{{ article.photo }}" alt=""></a>
+                <h5 class="nameP">{{article.name}}</h5>
+                <h3 class="priceP">{{article.price}} €</h3> 
+                <p class="card-text captionP">{{article.caption }}</p>
+
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

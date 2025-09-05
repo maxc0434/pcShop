@@ -3,6 +3,7 @@
 {% block title %}Nouvel Article{% endblock %}
 
 {% block body %}
+ {% include 'layouts/_flash_message.html.twig' %}
     <h1>Créer un Nouvel Article</h1>
 
     {{ include('article/_form.html.twig') }}
