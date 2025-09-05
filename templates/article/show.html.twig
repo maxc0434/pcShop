@@ -44,8 +44,24 @@
 				</tr>
 				<tr>
 					<th>Photo</th>
-					<td><img class="w-25" src="{{ article.photo }}" alt=""></td>
+					<td>
+						<a href="{{ article.photo }}" target="_blank">
+							<img class="w-25" src="{{ article.photo }}" alt="Agrandir la photo" style="cursor:zoom-in;">
+						</a>
+					</td>
 				</tr>
+				<tr>
+					<th>Moyenne des notes utilisateurs</th>
+					<td>
+						{% if moyenne > 0 %}
+							{{ moyenne|number_format(2, ',', ' ') }}
+							/ 5
+						{% else %}
+							Pas de notes disponibles
+						{% endif %}
+					</td>
+				</tr>
+				<tr></tr>
 				<tr>
 					<th>PC ou MAC
 					</th>
@@ -53,13 +69,18 @@
 				</tr>
 				<tr>
 					<th>Les Commentaires des clients</th>
-					<td> <a href="{{ path ('app_article_comment', {'id': article.id}) }}"> Voir tous les Commentaires</a></td>
+					<td>
+						<a class="d-flex justify-content-center  btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm fw-bold" href="{{ path ('app_article_comment', {'id': article.id}) }}">
+							Voir tous les Commentaires</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+
+
 	{% if app.user %}
-		<div class="container">
+		<div class="container borderCss mt-5">
 			<div class="row">
 				<h1 class="mt-5 mb-5 text-center">Laissez Votre Commentaire</h1>
 				<div class="col-md-6 offset-md-3">
@@ -113,11 +134,11 @@
 						{{ form_errors(form.content) }}
 					</div>
 					{# {{ form_rest(form) }} affiche tous les champs obligatoires du formulaire, en commentant cette ligne on supprime les champs obligatoires
-					 mais aussi le token, donc pas d'envoi en BDD. il faut rajouter le token avec la ligne 117 #} 
-					{{ form_widget(form._token) }} 
+															 mais aussi le token, donc pas d'envoi en BDD. il faut rajouter le token avec la ligne 117 #}
+					{{ form_widget(form._token) }}
 
 					<div class="form-group">
-						<button class="btn btn-info mt-2 text-white" type="submit">Soumettre</button>
+						<button class="btn btn-info mt-2 text-white" type="submit">Envoyer mon Commentaire</button>
 					</div>
 
 					{{ form_end(form, {'render_rest': false}) }}

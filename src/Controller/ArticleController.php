@@ -23,11 +23,13 @@ final class ArticleController extends AbstractController
     #[Route(name: 'app_article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository, CategorieRepository $categorieRepository): Response
     {
+
         return $this->render('article/index.html.twig', [
             'articles' => $articleRepository->findAll(),
             'categories' => $categorieRepository->findAll(),
         ]);
     }
+
 
     #[Route('/articles/{id}', name: 'app_article_filter', methods: ['GET'])]
     public function filter(ArticleRepository $articleRepository, CategorieRepository $categorieRepository, ?int $id = null): Response
@@ -47,7 +49,7 @@ final class ArticleController extends AbstractController
 
 
 
-    #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
+    #[Route('/admin/new', name: 'app_article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $article = new Article();
@@ -72,7 +74,6 @@ final class ArticleController extends AbstractController
     #[Route('/show/{id}', name: 'app_article_show', methods: ['GET', 'POST'])]
     public function show(CommentRepository $commentRepository, Article $article, Request $request, EntityManagerInterface $em): Response
     {
-
         $comment = new Comment();
         $comment->setArticle($article);
         $comment->setAutor($this->getUser());
@@ -87,14 +88,29 @@ final class ArticleController extends AbstractController
             return $this->redirectToRoute('app_article_index');
         }
 
+        // Récupération des notes 
+        $comments = $commentRepository->findBy(['article' => $article]);
+        $notes = [];
+        foreach ($comments as $c) {
+            if ($c->getNote() !== null) {
+                $notes[] = $c->getNote();
+            }
+        }
+
+        $moyenne = 0;
+        if (count($notes) > 0) {
+            $moyenne = array_sum($notes) / count($notes);
+        }
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
-            'comments' => $comment,
+            'comments' => $comments,
+            'moyenne' => $moyenne,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
@@ -112,7 +128,7 @@ final class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_article_delete', methods: ['POST'])]
+    #[Route('/admin/{id}', name: 'app_article_delete', methods: ['POST'])]
     public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->getPayload()->getString('_token'))) {
@@ -136,12 +152,12 @@ final class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/comment/{id}', name: 'app_comment_delete', methods: ['GET', 'POST'])]
+    #[Route('/admin/delete/comment/{id}', name: 'app_comment_delete', methods: ['GET', 'POST'])]
     public function delete_comment(Request $request, EntityManagerInterface $entityManager, Comment $comment): Response
     {
         // if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($comment);
-            $entityManager->flush();
+        $entityManager->remove($comment);
+        $entityManager->flush();
         // }
         // $articleId = $comment->getArticle()->getId();
         return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);

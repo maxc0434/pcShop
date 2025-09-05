@@ -1,69 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article index{% endblock %}
+{% block title %}Article index {% endblock %}
 
 {% block body %}
-    <h1 class="text-center">Article index</h1>
+	<h1 class="text-center mb-3 mt-5">Nos Articles </h1>
 
-    {# <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Caption</th>
-                <th>Price</th>
-                <th>Type</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.name }}</td>
-                <td>{{ article.caption }}</td>
-                <td>{{ article.price }}</td>
-                <td>{{ article.type ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table> #}
+	{% for article in articles %}
+		<div class="container d-flex justify-content-center">
+			<div class="card d-flex justify-content-center" style="width: 35rem;">
+				<img src="{{ article.photo }}" class="card-img-top mt-2 ms-2 me-2 mb-2 w-75" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">{{ article.name }}</h5>
+					<h5>_____________________________</h5>
+					<br>
+					<p class="text-decoration-underline">Description du produit:</p>
+					<p class="card-text">{{ article.caption }}</p>
+				</div>
+				<ul class="list-group list-group-flush">
+					<br>
+					<h5 class="text-center">Le Prix Maryse:</h5>
+					<li class="list-group-item">
+						<h4 class="text-center">{{ article.price }}
+							€</h4>
+					</li>
+				</ul>
 
-        {% for article in articles %}
-    <div class="container d-flex justify-content-center">
-            <div class="card d-flex justify-content-center" style="width: 35rem;">
-            <img src="{{ article.photo }}" class="card-img-top mt-2 ms-2 me-2 mb-2 w-75" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{ article.name }}</h5>
-                <h5>_____________________________</h5> <br>
-                <p class="text-decoration-underline">Description du produit:</p>
-                <p class="card-text">{{ article.caption }}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-            <br>
-                <h5 class="text-center">Le Prix Maryse:</h5>
-                <li class="list-group-item"><h4 class="text-center">{{ article.price }}  €</h4></li>
-            </ul>
-            </div>
-    </div>
-            <div class="container mt-3 mb-5 d-flex justify-content-center">
-                    <a class="btn btn-outline-primary" href="{{ path('app_article_show', {'id': article.id}) }}">Voir</a>
-                    {% if is_granted("ROLE_ADMIN") %}
-                    <a class="btn btn-outline-warning ms-1 me-1" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+			</div>
+		</div>
+		<div class="container mt-3 mb-5 d-flex justify-content-center">
+			<a class="btn btn-outline-primary" href="{{ path('app_article_show', {'id': article.id}) }}">Voir</a>
+			{% if is_granted("ROLE_ADMIN") %}
+				<a class="btn btn-outline-warning ms-1 me-1" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
 
-                    {% endif %}
-            </div>
-        {% endfor %}
-                    <div class="container d-flex justify-content-center mb-5">
-                    <a class="btn btn-outline-success" href="{{ path('app_article_new') }}"> Créer un nouvel Article</a>
-                    </div>
-    
+			{% endif %}
+		</div>
+	{% endfor %}
+	{% if is_granted("ROLE_ADMIN") %}
+		<div class="container d-flex justify-content-center mb-5">
+			<a class="btn btn-outline-success" href="{{ path('app_article_new') }}"> Créer un nouvel Article</a>
+		</div>
+	{% endif %}
+
 {% endblock %}

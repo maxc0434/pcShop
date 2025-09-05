@@ -1,27 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article
+{% block title %}Commentaires {% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/comments.css') }}">
 {% endblock %}
+
 
 {% block body %}
 
-<div>
-	{% for comment in comments %}
-		<div class="container">
-			<strong>{{ comment.autor.prenom }}</strong>
+	<div class="container commentCSS">
+		{% for comment in comments %}
+			<div class="container">
+				<strong class="fs-5">{{ comment.autor.prenom }}</strong>
 
-            <small>a commenté le : {{ comment.date |date('d/m/Y') }} </small>
-			
-			<p>{{ comment.content }}</p>
-		</div>
-<div>
-	<a class="btn" href="{{ path('app_comment_delete', {'id': comment.id, 'token': csrf_token('delete' ~ comment.id)}) }}"> Supprimer </a>
-</div>
-	{% else %}
-		<p>Aucun commentaire pour cet article, soyez le premier à commenter !</p>
-	{% endfor %}
-</div>
-
+				<small>a commenté le :
+					{{ comment.date |date('d/m/Y') }}
+				</small>
+				<h5> Note: {{ comment.note }} /5</h5>
+				<p>{{ comment.content }}</p>
+			</div>
+			<div>
+			{% if is_granted("ROLE_ADMIN") %}
+				<a class="btn btn-outline-danger rounded-pill px-4 py-2 shadow-sm fw-bold ms-1 me-1 " href="{{ path('app_comment_delete', {'id': comment.id, 'token': csrf_token('delete' ~ comment.id)}) }}">
+					Supprimer
+				</a>
+			{% endif %}
+			</div>
+		{% else %}
+			<p>Aucun commentaire pour cet article, soyez le premier à commenter !</p>
+		{% endfor %}
+	</div>
 
 
 {% endblock %}
