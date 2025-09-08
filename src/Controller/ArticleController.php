@@ -96,7 +96,7 @@ final class ArticleController extends AbstractController
                 $notes[] = $c->getNote();
             }
         }
-
+        // Moyenne des notes
         $moyenne = 0;
         if (count($notes) > 0) {
             $moyenne = array_sum($notes) / count($notes);

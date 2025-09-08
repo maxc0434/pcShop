@@ -1,63 +1,84 @@
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
 {% endblock %}
 
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light bg-light ">
-  <div class="container navContainer">
-    <a class="navbar-brand fontTitleSite" href="{{ path('app_homepage') }}"> <img class="logoSite" src="https://st2.depositphotos.com/1007989/9405/i/450/depositphotos_94050838-stock-illustration-laptop-telling-joke.jpg" alt=""> PC Shop</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link active navbtn" aria-current="page" href="{{ path('app_homepage') }} ">Accueil</a>
-        </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Catégories
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item text-primary categoryTitle" href="{{ path('app_categorie_index') }}">Toutes les Catégories</a></li>
-                              
-                <li><hr class="dropdown-divider"></li>
-        {% if categories is defined %}
-              
-              {% for category in categories %}
-                <li><a class="dropdown-item text-primary categoryTitle" href="{{ path('app_categorie_show', {'id':category.id}) }}">{{ category.name }}</a></li>
+	<div class="container navContainer">
+		<a class="navbar-brand fontTitleSite" href="{{ path('app_homepage') }}">
+			<img class="logoSite" src="https://st2.depositphotos.com/1007989/9405/i/450/depositphotos_94050838-stock-illustration-laptop-telling-joke.jpg" alt="">
+			PC Shop</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarScroll">
+			<ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+				<li class="nav-item">
+					<a class="nav-link active navbtn" aria-current="page" href="{{ path('app_homepage') }} ">Accueil</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Catégories
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item text-primary categoryTitle" href="{{ path('app_categorie_index') }}">Toutes les Catégories</a>
+						</li>
 
-                <li><hr class="dropdown-divider"></li>
-              {% endfor %}
+						<li><hr class="dropdown-divider"></li>
+						{% if categories is defined %}
 
-        {% endif %}
+							{% for category in categories %}
+								<li>
+									<a class="dropdown-item text-primary categoryTitle" href="{{ path('app_categorie_show', {'id':category.id}) }}">{{ category.name }}</a>
+								</li>
+
+								<li><hr class="dropdown-divider"></li>
+							{% endfor %}
+
+						{% endif %}
+					</ul>
+				</li>
+
+
+				<li class="nav-item">
+					<a class="nav-link navbtn" href="{{ path('app_article_index') }}">Nos Articles</a>
+				</li>
+
+				{% if is_granted("ROLE_ADMIN") %}
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							ADMIN
+						</a>
+						<ul class="dropdown-menu">
+								<a class="dropdown-item text-primary" href="{{ path('app_user') }}">Gestion des utilisateurs</a>
             </ul>
           </li>
-
-      <li class="nav-item">
-        <a class="nav-link navbtn" href="{{ path('app_article_index') }}">Nos Articles</a> 
-      </li>
+					{% endif %}
 
 
-         {% if app.user %}
-            <li class="nav-item navbtn">
-              <a href=" {{ path('app_logout')}}" class="nav-link "> Déconnexion </a>
-            </li>
-          {% else %}
-            <li class="nav-item navbtn">
-              <a href= " {{ path('app_login')}}" class="nav-link "> Connexion</a>
-            </li>
-            <li class="nav-item navbtn">
-              <a href= " {{ path('app_register')}}" class="nav-link "> Inscription</a>
-            </li>
-        {% endif %} 
-    
-
-    </ul>
-      <form class="d-flex " method="get" action="{{ path('app_search_engine')}}">
-        <input name="word" class="form-control me-2 navSearch" type="search" placeholder="Search" aria-label="Search"/>
-        <button data-turbo=false class="btn btn-outline-dark" type="submit">Rechercher</button>
-      </form>
-      </div>
-  </div>
-</nav>
+						{% if app.user %}
+							<li class="nav-item navbtn">
+								<a href=" {{ path('app_logout')}}" class="nav-link ">
+									Déconnexion
+								</a>
+							</li>
+						{% else %}
+							<li class="nav-item navbtn">
+								<a href=" {{ path('app_login')}}" class="nav-link ">
+									Connexion</a>
+							</li>
+							<li class="nav-item navbtn">
+								<a href=" {{ path('app_register')}}" class="nav-link ">
+									Inscription</a>
+							</li>
+						{% endif %}
+					</li>
+				</ul>
+				<form class="d-flex " method="get" action="{{ path('app_search_engine')}}">
+					<input name="word" class="form-control me-2 navSearch" type="search" placeholder="Search" aria-label="Search"/>
+					<button data-turbo="false" class="btn btn-outline-dark" type="submit">Rechercher</button>
+				</form>
+			</div>
+		</div>
+	</nav>

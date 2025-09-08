@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardAdminController!{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/adminDashboard.css') }}">
+{% endblock %}
+
+{% block body %}
+
+{% for data in datas %}
+<div class="container">
+<div class="card">
+  <div class="card-body">
+    <h2>{{data.nom}}</h2>
+    <h3>{{data.prenom}}</h3>
+    <h3>{{data.email}}</h3>
+      <a href="{{ path ('app_update_register', {'id': data.id}) }}" class="btn btn-warning"> Modifier </a>
+      <a href="{{ path ('delete_user', {'id': data.id}) }}" class="btn btn-danger"> Supprimer </a>
+   
+  </div>
+</div>
+</div>
+{% endfor %}
+
+{% endblock %}

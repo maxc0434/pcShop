@@ -52,13 +52,19 @@
 				</tr>
 				<tr>
 					<th>Moyenne des notes utilisateurs</th>
-					<td>
-						{% if moyenne > 0 %}
+					<td >
+						{% if moyenne > 0 and moyenne < 3 %}
+						<span class="badge bg-danger fs-6 mt-2">
+							{{ moyenne|number_format(2, ',', ' ') }}
+							/ 5
+						{% elseif moyenne >= 3 %}
+						<span class="badge bg-success fs-6 mt-2">
 							{{ moyenne|number_format(2, ',', ' ') }}
 							/ 5
 						{% else %}
 							Pas de notes disponibles
 						{% endif %}
+						</span>
 					</td>
 				</tr>
 				<tr></tr>
