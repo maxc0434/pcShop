@@ -1,0 +1,14 @@
+body{
+    position: relative;
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;
+    background: url(https://photo.16pic.com/00/83/67/16pic_8367061_b.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    opacity: 0.5;
+}

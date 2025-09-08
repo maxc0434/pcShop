@@ -1,3 +1,24 @@
+body{
+    position: relative;
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;
+    background: url(https://media.istockphoto.com/id/1849966331/fr/vectoriel/puce-cpu-sur-la-carte-m%C3%A8re-concept-de-processeur-de-processeurs-dordinateur-central.jpg?s=612x612&w=0&k=20&c=v03Hz_4_8y0mmmaEkolV9-6YgnbGUXxr9VObSBA2xsY=);
+    /* background-repeat: no-repeat;
+    background-size: cover; */
+    opacity: 0.6;
+}
+    
+.categTitle{
+    font-size: 50px;
+    font-weight: 400;
+}
+
+
 .categIndexCss{
     display: flex;
     justify-content: center;

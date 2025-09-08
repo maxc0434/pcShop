@@ -9,38 +9,10 @@
 {% block body %}
     <h1 class="text-center mt-5 mb-3">Les Catégories</h1>
 
-{# <div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for categorie in categories %}
-            <tr>
-                <td>{{ categorie.id }}</td>
-                <td>{{ categorie.name }}</td>
-                <td>
-                    <a class="btn btn-outline-primary" href="{{ path('app_categorie_show', {'id': categorie.id}) }}">Voir</a>
-                    <a class="btn btn-outline-info" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div> #}
-
         <div class="container categIndexCss">
      {% for categorie in categories %}
         <div class="card categCard " >
-        <img class="categImg mt-3 " src="{{ categorie.photo}}" class="card-img-top" alt="...">
+        <img class="categImg mt-3 mx-auto d-block " src="{{ categorie.photo }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h4 class="card-title text-center fw-bold">{{ categorie.name }}</h4>
 
@@ -59,7 +31,7 @@
 
 {% if is_granted("ROLE_ADMIN") %}
 <div class="container d-flex justify-content-center mt-5">
-    <a class="btn btn-outline-success" href="{{ path('app_categorie_new') }}">Créer</a>
+    <a class="btn btn-success" href="{{ path('app_categorie_new') }}">Créer une nouvelle catégorie</a>
 </div>
 {% endif %}
 {% endblock %}

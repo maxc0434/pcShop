@@ -2,13 +2,17 @@
 
 {% block title %}Nouvel Article{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/articleNew.css') }}">
+{% endblock %}
+
 {% block body %}
  {% include 'layouts/_flash_message.html.twig' %}
-    <h1>Créer un Nouvel Article</h1>
+    <h1 class="text-center mb-3 mt-5">Créer un Nouvel Article</h1>
 
     {{ include('article/_form.html.twig') }}
     
-<div class="container d-flex justify-content-center">
+<div class="d-flex justify-content-center">
     <a class="btn btn-primary" href="{{ path('app_article_index') }}">Retour</a>
 </div>
 {% endblock %}

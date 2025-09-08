@@ -2,12 +2,16 @@
 
 {% block title %}Article index {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/articleShow.css') }}">
+{% endblock %}
+
 {% block body %}
 	<h1 class="text-center mb-3 mt-5">Nos Articles </h1>
 
 	{% for article in articles %}
 		<div class="container d-flex justify-content-center">
-			<div class="card d-flex justify-content-center" style="width: 35rem;">
+			<div class="card d-flex justify-content-center mt-3 mb-5" style="width: 35rem;">
 				<img src="{{ article.photo }}" class="card-img-top mt-2 ms-2 me-2 mb-2 w-75" alt="...">
 				<div class="card-body">
 					<h5 class="card-title">{{ article.name }}</h5>
@@ -25,19 +29,19 @@
 					</li>
 				</ul>
 
-			</div>
-		</div>
-		<div class="container mt-3 mb-5 d-flex justify-content-center">
+		<div class="container mt-3 mb-3 d-flex justify-content-center">
 			<a class="btn btn-outline-primary" href="{{ path('app_article_show', {'id': article.id}) }}">Voir</a>
 			{% if is_granted("ROLE_ADMIN") %}
-				<a class="btn btn-outline-warning ms-1 me-1" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+				<a class="btn btn-outline-info ms-1 me-1" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
 
 			{% endif %}
+		</div>
+			</div>
 		</div>
 	{% endfor %}
 	{% if is_granted("ROLE_ADMIN") %}
 		<div class="container d-flex justify-content-center mb-5">
-			<a class="btn btn-outline-success" href="{{ path('app_article_new') }}"> Créer un nouvel Article</a>
+			<a class="btn btn-success" href="{{ path('app_article_new') }}"> Créer un nouvel Article</a>
 		</div>
 	{% endif %}
 

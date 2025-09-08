@@ -2,8 +2,12 @@
 
 {% block title %}New Categorie{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/categNew.css') }}">
+{% endblock %}
+
 {% block body %}
-    <h1>Create new Categorie</h1>
+    <h1 class="text-center mb-3 mt-5">Nouvelle Categorie</h1>
 
     {{ include('categorie/_form.html.twig') }}
 <div class=" d-flex justify-content-center">

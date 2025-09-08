@@ -1,0 +1,15 @@
+body{
+    position: relative;
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;
+    background: url(https://static.vecteezy.com/system/resources/previews/003/217/491/non_2x/cyber-hacker-attack-background-skull-free-vector.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.6;
+}
+   

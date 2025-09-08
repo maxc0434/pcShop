@@ -1,0 +1,14 @@
+body{
+    position: relative;
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;
+    background: url(https://www.mnp.ca/-/media/images/mnp/service/ease-bookkeeping-services/campaign-pages/ease-people-campaign/8050-23-corp-ease-people-campaign---landing-page-header.webp);
+    background-repeat: no-repeat;
+    background-size:cover;
+    opacity: 0.5;
+}
