@@ -21,10 +21,10 @@
 }
 
 .container.navContainer{
-  max-width: 1500px;
+  max-width: 1200px;
 }
-
+/* 
 form{
   position: relative;
-  left: 300px;
-}
+  left: 200px;
+} */

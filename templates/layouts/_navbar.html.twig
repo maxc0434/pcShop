@@ -51,34 +51,43 @@
 							ADMIN
 						</a>
 						<ul class="dropdown-menu">
-								<a class="dropdown-item text-primary" href="{{ path('app_user') }}">Gestion des utilisateurs</a>
-            </ul>
-          </li>
-					{% endif %}
-
-
-						{% if app.user %}
-							<li class="nav-item navbtn">
-								<a href=" {{ path('app_logout')}}" class="nav-link ">
-									Déconnexion
-								</a>
-							</li>
-						{% else %}
-							<li class="nav-item navbtn">
-								<a href=" {{ path('app_login')}}" class="nav-link ">
-									Connexion</a>
-							</li>
-							<li class="nav-item navbtn">
-								<a href=" {{ path('app_register')}}" class="nav-link ">
-									Inscription</a>
-							</li>
-						{% endif %}
+							<a class="dropdown-item text-primary" href="{{ path('app_user') }}">Gestion des utilisateurs</a>
+						</ul>
 					</li>
-				</ul>
-				<form class="d-flex " method="get" action="{{ path('app_search_engine')}}">
-					<input name="word" class="form-control me-2 navSearch" type="search" placeholder="Search" aria-label="Search"/>
-					<button data-turbo="false" class="btn btn-outline-dark" type="submit">Rechercher</button>
-				</form>
-			</div>
-		</div>
-	</nav>
+				{% endif %}
+
+
+				{% if app.user %}
+					<li class="nav-item navbtn">
+						<a href=" {{ path('app_logout')}}" class="nav-link ">
+							Déconnexion
+						</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Profil
+						</a>
+						<ul class="dropdown-menu">
+            <li>
+							<a class="dropdown-item text-primary" href="{{ path('app_user_filter', {'id': app.user.id} )}}">Mon Profil</a>
+            </li>
+						</ul>
+					</li>
+				{% else %}
+					<li class="nav-item navbtn">
+						<a href=" {{ path('app_login')}}" class="nav-link ">
+							Connexion</a>
+					</li>
+					<li class="nav-item navbtn">
+						<a href=" {{ path('app_register')}}" class="nav-link ">
+							Inscription</a>
+					</li>
+				{% endif %}
+			</li>
+		</ul>
+		<form class="d-flex " method="get" action="{{ path('app_search_engine')}}">
+			<input name="word" class="form-control me-2 navSearch" type="search" placeholder="Search" aria-label="Search"/>
+			<button data-turbo="false" class="btn btn-outline-dark" type="submit">Rechercher</button>
+		</form>
+	</div>
+</div></nav>

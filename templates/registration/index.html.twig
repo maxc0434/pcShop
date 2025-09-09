@@ -3,20 +3,20 @@
 {% block title %}Hello DashboardAdminController!{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/adminDashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/registerIndex.css') }}">
 {% endblock %}
 
 {% block body %}
 
 {% for data in datas %}
-<div class="container">
+<div class="container mt-5 mb-2 divCard">
 <div class="card">
-  <div class="card-body">
+  <div class="card-body ">
     <h2>{{data.nom}}</h2>
     <h3>{{data.prenom}}</h3>
     <h3>{{data.email}}</h3>
-      <a href="{{ path ('app_update_register', {'id': data.id}) }}" class="btn btn-warning"> Modifier </a>
-      <a href="{{ path ('delete_user', {'id': data.id}) }}" class="btn btn-danger"> Supprimer </a>
+      <a href="{{ path ('app_update_register', {'id': data.id}) }}" class="btn btn-outline-warning"> Modifier </a>
+      <a href="{{ path ('delete_user', {'id': data.id}) }}" class="btn btn-outline-danger"> Supprimer </a>
    
   </div>
 </div>

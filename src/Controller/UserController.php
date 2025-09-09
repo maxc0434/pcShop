@@ -23,6 +23,15 @@ final class UserController extends AbstractController
         ]);
     }
 
+    #[Route('/user/{id}', name: 'app_user_filter')]
+    public function filter(int $id, UserRepository $UserRepo): Response
+    {
+        $datas = $UserRepo->findBy(['id' => $id]);
+        return $this->render('registration/index.html.twig', [
+            'datas' => $datas,
+        ]);
+    }
+
 
 
     #[Route('/user/delete/{id}', name: 'delete_user')]
