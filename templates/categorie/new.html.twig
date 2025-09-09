@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Categorie{% endblock %}
+{% block title %}Nouvelle Categorie{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/categNew.css') }}">
@@ -11,7 +11,7 @@
 
     {{ include('categorie/_form.html.twig') }}
 <div class=" d-flex justify-content-center">
-    <a class="btn btn-primary" href="{{ path('app_categorie_index') }}">Retour</a>
+    <a class="btn btn-primary rounded-pill px-4 py-2 shadow-sm" href="{{ path('app_categorie_index') }}">Retour</a>
 </div>
 
 {% endblock %}

@@ -1,3 +1,18 @@
+body{
+    position: relative;
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -1;
+    background: url(https://img.freepik.com/photos-premium/couches-cercles-noirs-abstraits-du-papier-fond-sombre-coupe_974629-87613.jpg?semt=ais_hybrid&w=740&q=80);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.7;
+}
+    
 .divCard{
     width: 700px;
 }

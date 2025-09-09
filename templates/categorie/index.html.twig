@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categorie index{% endblock %}
+{% block title %}Les Categorie{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/categorie.css') }}">
@@ -19,9 +19,9 @@
                 <p class="card-text">{{ categorie.description }} </p>
                         
                         <div class="divBtn">
-                            <a class="btn btn-outline-primary" href="{{ path('app_categorie_show', {'id': categorie.id}) }}">Voir</a>
+                            <a class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm" href="{{ path('app_categorie_show', {'id': categorie.id}) }}">Voir</a>
                                 {% if is_granted("ROLE_ADMIN") %}
-                                    <a class="btn btn-outline-info ms-1" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">Modifier</a>
+                                    <a class="btn btn-outline-info rounded-pill px-4 py-2 shadow-sm ms-1" href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">Modifier</a>
                                 {% endif %}
                         </div>
             </div>
@@ -31,7 +31,7 @@
 
 {% if is_granted("ROLE_ADMIN") %}
 <div class="container d-flex justify-content-center mt-5">
-    <a class="btn btn-success" href="{{ path('app_categorie_new') }}">Créer une nouvelle catégorie</a>
+    <a class="btn btn-success rounded-pill px-4 py-2 shadow-sm " href="{{ path('app_categorie_new') }}">Créer une nouvelle catégorie</a>
 </div>
 {% endif %}
 {% endblock %}

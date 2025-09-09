@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Categorie{% endblock %}
+{% block title %}Modification de la Categorie{% endblock %}
 
 {% block body %}
-    <h1>Edit Categorie</h1>
+    <h1 class="text-center mt-5 mb-2">Modification de la Categorie</h1>
     <div class="container d-flex justify-content">
     {{ include('categorie/_form.html.twig', {'button_label': 'modifier'}) }}
 
     </div>
-    <a class="btn btn-info mb-1" href="{{ path('app_categorie_index') }}">back to list</a>
-
+    <div class="container d-flex justify-content-center">
+    <a class="btn btn-outline-info mb-1 rounded-pill px-4 py-2 shadow-sm" href="{{ path('app_categorie_index') }}">Retour</a>
     {{ include('categorie/_delete_form.html.twig') }}
+    </div>
+
 {% endblock %}

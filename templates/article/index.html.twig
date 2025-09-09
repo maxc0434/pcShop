@@ -30,9 +30,9 @@
 				</ul>
 
 		<div class="container mt-3 mb-3 d-flex justify-content-center">
-			<a class="btn btn-outline-primary" href="{{ path('app_article_show', {'id': article.id}) }}">Voir</a>
+			<a class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm" href="{{ path('app_article_show', {'id': article.id}) }}">Voir</a>
 			{% if is_granted("ROLE_ADMIN") %}
-				<a class="btn btn-outline-info ms-1 me-1" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+				<a class="btn btn-outline-info ms-1 me-1 rounded-pill px-4 py-2 shadow-sm" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
 
 			{% endif %}
 		</div>
@@ -41,7 +41,7 @@
 	{% endfor %}
 	{% if is_granted("ROLE_ADMIN") %}
 		<div class="container d-flex justify-content-center mb-5">
-			<a class="btn btn-success" href="{{ path('app_article_new') }}"> Créer un nouvel Article</a>
+			<a class="btn btn-success rounded-pill px-4 py-2 shadow-sm" href="{{ path('app_article_new') }}"> Créer un nouvel Article</a>
 		</div>
 	{% endif %}
 
